@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Angular + Tailwind CSS Starter with Cat API (FrontEnd)
 Dashboard using Angular 15 and Tailwind CSS. This project was created with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.5.
 
@@ -31,3 +32,6 @@ Although there are currently no more elaborate tests, run `ng test` for unit tes
 
 ## Deploy
 As it is connected to Vercel, a process which follows the agile CI/CD path, their application connects directly to the project repository, via authorization via a Github token, all you have to do is commit the changes, so that they are automatically updated.
+=======
+# System_SRI_Films_UI
+>>>>>>> fb9ad1c30ba71c2a40849e54bf6a0e83e9c1bc58
