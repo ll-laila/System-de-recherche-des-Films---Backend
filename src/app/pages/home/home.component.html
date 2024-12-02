@@ -1,0 +1,99 @@
+<div class="relative z-10 flex-shrink-0 flex h-16 bg-white border-b border-gray-200 lg:border-none  rounded-2xl shadow-lg">
+  <button type="button" class="px-4 border-r border-gray-200 text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cyan-500 lg:hidden">
+    <span class="sr-only">Ouvrir la barre latérale</span>
+
+    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
+    </svg>
+  </button>
+
+  <div class="flex-1 px-4 flex justify-between sm:px-6 lg:max-w-6xl lg:mx-auto lg:px-8">
+    <div class="flex-1 flex">
+      <form class="w-full flex md:ml-0" action="#" method="GET">
+        <label for="search-field" class="sr-only">Recherche        </label>
+
+        <div class="relative w-full text-gray-400 focus-within:text-gray-600">
+          <div class="absolute inset-y-0 left-0 flex items-center pointer-events-none" aria-hidden="true">
+
+            <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+            </svg>
+          </div>
+
+          <input id="search-field" name="search-field" class="block w-full h-full pl-8 pr-3 py-2 border-transparent text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-transparent sm:text-sm" [(ngModel)]="enteredSearchValue" placeholder="Entrez votre film" (ngModelChange)="onSearchChange()" (blur)="outSearch()" type="search">
+
+
+        </div>
+      </form>
+    </div>
+
+    <div class="ml-4 flex items-center md:ml-6">
+      <!-- ... -->
+    </div>
+  </div>
+</div>
+
+<section class="px-2 py-8 mb-12 bg-white md:px-0 relative w-full">
+  <div *ngIf="showResults">
+    <!-- Liste des films suggérés -->
+    <ul *ngIf="showSuggested" class="bg-white text-gray-700 border mt-[-10px] rounded-lg shadow-lg absolute w-full py-2 z-10">
+      <li *ngFor="let film of suggestedFilms">
+        <a [routerLink]="['/Films', film.fileName]" (click)="closeSearch()" class="block hover:bg-gray-100 whitespace-no-wrap py-2 px-4">
+          <p class="text-2xl font-bold">{{ film.title }}</p>
+          <p class="text-sm"><b>{{"Genre : "}}</b>{{" "}}{{ film.genres }}<b>{{" - "}}{{"Publié à :"}}</b>{{" "}}{{film.year}}</p>
+          <p class="italic">{{ film.extract }}</p>
+        </a>
+      </li>
+    </ul>
+
+    <!-- Aucun résultat trouvé -->
+    <ul *ngIf="!showSuggested" class="bg-white text-gray-700 border mt-[-10px] rounded-lg shadow-lg absolute w-full py-2 z-10">
+      <li class="block bg-gray-100 whitespace-no-wrap py-2 px-4">
+        Aucun résultat trouvé !
+      </li>
+    </ul>
+  </div>
+</section>
+
+
+
+<section *ngIf="!showResults" class="">
+  <div class="container items-center max-w-6xl px-8 mx-auto">
+    <div class="flex flex-wrap items-center sm:-mx-8">
+      <div class="w-full md:w-1/2 md:pr-8">
+        <div class="w-full pb-6 space-y-6 sm:max-w-md lg:max-w-lg md:space-y-4 lg:space-y-8 xl:space-y-9 sm:pr-5 lg:pr-0 md:pb-0">
+          <h3 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-3xl md:text-3xl lg:text-3xl xl:text-5xl">
+            <span class="block xl:inline">Découvrez les Meilleurs</span>
+            <span class="block text-indigo-600 xl:inline" data-primary="indigo-600"> Films en un Clic !</span>
+          </h3>
+          <p class="mx-auto text-base text-gray-600 sm:max-w-md lg:text-xl md:max-w-3xl">Trouvez facilement des films et séries selon vos goûts et vos plateformes préférées. Commencez dès maintenant !</p>
+
+          <div class="relative flex flex-col sm:flex-row sm:space-x-4">
+
+            <button href="film-list"  (click)="mostSearched()" type="button" class="w-full sm:w-auto shadow-lg px-8 py-3 border border-transparent text-lg leading-6 font-bold rounded-full text-white bg-gradient-to-r from-indigo-600 to-blue-500 hover:from-indigo-500 hover:to-blue-400 focus:outline-none transition duration-150 ease-in-out md:py-4 md:text-base cursor-pointer focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 flex items-center justify-center">
+              Explorez
+              <svg class="w-5 h-5 ml-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+          </button>
+          </div>
+        </div>
+      </div>
+      <div class="w-full md:w-1/2 shadow-lg">
+        <svg class="hidden lg:block absolute top-0 right-0 -mt-20 -mr-20" width="404" height="384" fill="none" viewBox="0 0 404 384" aria-hidden="true">
+          <defs>
+            <pattern id="de316486-4a29-4312-bdfc-fbce2132a2c1" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+              <rect x="0" y="0" width="4" height="4" class="text-gray-200" fill="currentColor" />
+            </pattern>
+          </defs>
+          <rect width="404" height="384" fill="url(#de316486-4a29-4312-bdfc-fbce2132a2c1)" />
+        </svg>
+        <div class="w-full h-auto overflow-hidden rounded-md drop-shadow-lg sm:rounded-xl" data-rounded="rounded-xl" data-rounded-max="rounded-full">
+            <img src="../../../assets/filmHome.png" loading="lazy">
+          </div>
+      </div>
+    </div>
+  </div>
+</section>
+
