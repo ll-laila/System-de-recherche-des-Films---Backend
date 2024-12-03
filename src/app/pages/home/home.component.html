@@ -28,7 +28,7 @@
     </div>
 
     <div class="ml-4 flex items-center md:ml-6">
-      <!-- ... -->
+      <!-- .... -->
     </div>
   </div>
 </div>
@@ -37,14 +37,25 @@
   <div *ngIf="showResults">
     <!-- Liste des films suggérés -->
     <ul *ngIf="showSuggested" class="bg-white text-gray-700 border mt-[-10px] rounded-lg shadow-lg absolute w-full py-2 z-10">
-      <li *ngFor="let film of suggestedFilms">
-        <a [routerLink]="['/Films', film.fileName]" (click)="closeSearch()" class="block hover:bg-gray-100 whitespace-no-wrap py-2 px-4">
-          <p class="text-2xl font-bold">{{ film.title }}</p>
-          <p class="text-sm"><b>{{"Genre : "}}</b>{{" "}}{{ film.genres }}<b>{{" - "}}{{"Publié à :"}}</b>{{" "}}{{film.year}}</p>
-          <p class="italic">{{ film.extract }}</p>
+      <li *ngFor="let film of suggestedFilms" style="display: flex; align-items: center; justify-content: space-between; padding: 8px;">
+        <a [routerLink]="['/Films', film.fileName]" (click)="closeSearch()"
+           style="flex: 1; text-decoration: none; color: inherit; display: flex; align-items: center;">
+          <div style="flex: 1; padding-right: 16px;">
+            <p style="font-size: 1.5rem; font-weight: bold; margin: 0;">{{ film.title }}</p>
+            <p style="font-size: 0.875rem; margin: 4px 0;">
+              <b>Genre :</b> {{ film.genres }}
+              <b> - Publié à :</b> {{ film.year }}
+            </p>
+            <p style="font-style: italic; margin: 0;">{{ film.extract }}</p>
+          </div>
+          <img *ngIf="film.video"
+               [src]="getThumbnailVideo(film.video)"
+               alt="Thumbnail"
+               style="width: 100px; height: 80px; object-fit: cover; border-radius: 8px;"/>
         </a>
       </li>
     </ul>
+
 
     <!-- Aucun résultat trouvé -->
     <ul *ngIf="!showSuggested" class="bg-white text-gray-700 border mt-[-10px] rounded-lg shadow-lg absolute w-full py-2 z-10">

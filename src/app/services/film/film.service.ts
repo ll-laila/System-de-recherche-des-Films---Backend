@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Film } from 'src/app/models/film';
-import { environment } from 'src/environments/environment';
 
-const url = environment.apiUrl;
 
 @Injectable({
   providedIn: 'root'

@@ -44,7 +44,7 @@ export class HomeComponent {
     if (this.enteredSearchValue !== '') {
       this.showResults = true;
 
-      this.filmService.searchMovies(this.enteredSearchValue).subscribe(data => {
+     this.filmService.searchMovies(this.enteredSearchValue).subscribe(data => {
         this.suggestedFilms = data;
 
         if (this.suggestedFilms.length > 0) {
@@ -57,6 +57,22 @@ export class HomeComponent {
     } else {
       this.showResults = false;
       this.suggestedFilms = [];
+
     }
+  }
+
+
+  getThumbnailVideo(videoUrl: string): any {
+    const videoId = this.extractVideoId(videoUrl);
+    if (videoId) {
+      return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+    }
+    return '';
+  }
+
+  private extractVideoId(url: string): string {
+    const regex = /(?:https?:\/\/(?:www\.)?youtube\.com\/(?:[^\/]+\/.*\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|https?:\/\/(?:www\.)?youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+    const match = url.match(regex);
+    return match && match[1] ? match[1] : '';
   }
 }
