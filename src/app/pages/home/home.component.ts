@@ -36,7 +36,7 @@ export class HomeComponent {
 
   outSearch() {
     setTimeout(() => {
-      this.closeSearch();
+      this.closeSearch();  
     }, 200)
   }
 
